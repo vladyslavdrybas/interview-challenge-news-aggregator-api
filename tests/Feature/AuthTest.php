@@ -2,17 +2,20 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
+    use RefreshDatabase, WithFaker;
+
     public function test_register_a_user()
     {
+        $email = fake()->email();
+
         $response = $this->postJson('/api/v1/auth/register', [
-            'email' => 'user@example.com',
+            'email' => $email,
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
@@ -24,7 +27,7 @@ class AuthTest extends TestCase
 
         // Assert that the user is stored in the database
         $this->assertDatabaseHas('users', [
-            'email' => 'user@example.com',
+            'email' => $email,
         ]);
     }
 }
