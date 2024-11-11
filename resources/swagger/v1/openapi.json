@@ -1,0 +1,67 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel API",
+        "description": "API for news aggregator challenge.",
+        "version": "1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8090/api/v1",
+            "description": "Main API"
+        }
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "tags": [
+                    "Home"
+                ],
+                "summary": "Welcome Message",
+                "description": "Returns a welcome message for the API",
+                "operationId": "a2d006fc7e9cb6e35d099d5667cebf70",
+                "responses": {
+                    "200": {
+                        "description": "Welcome message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Welcome to the API!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearerAuth"
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "description": "Bearer api token authentication",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "bearerToken",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Home",
+            "description": "Home"
+        }
+    ]
+}
