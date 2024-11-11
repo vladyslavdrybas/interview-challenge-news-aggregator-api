@@ -21,6 +21,9 @@ you can find all needed commands in the `Makefile`.
 * API Documentation http://localhost:8090/api/docs
 * Debugger http://localhost:8090/telescope/requests
 
+## Database
+![database_schema.png](documentation/database_schema.png)
+
 ## Issues
 
 ### Permissions with Sail
