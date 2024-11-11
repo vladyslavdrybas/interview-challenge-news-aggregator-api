@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\Api\ApiHomeController;
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v'. config('app.api.version') . '/auth')
     ->group(function () {
-        Route::post('/register', [AuthController::class, 'store'])->name('api.auth.user.store');
+        Route::post('/register', [RegisterController::class, 'store'])->name('api.auth.register');
     });
 
 Route::prefix('/v'. config('app.api.version'))
