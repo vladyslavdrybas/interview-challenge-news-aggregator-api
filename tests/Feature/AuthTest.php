@@ -10,11 +10,11 @@ class AuthTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
-    public function test_register_a_user()
+    public function test_user_register_success()
     {
         $email = fake()->email();
 
-        $response = $this->postJson('/api/v1/auth/register', [
+        $response = $this->postJson($this->apiRoute('/auth/register'), [
             'email' => $email,
             'password' => 'password',
             'password_confirmation' => 'password',
@@ -30,4 +30,28 @@ class AuthTest extends TestCase
             'email' => $email,
         ]);
     }
+
+    public function test_user_register_throw_duplication_error()
+    {
+        $email = fake()->email();
+
+        $this->postJson($this->apiRoute('/auth/register'), [
+            'email' => $email,
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ]);
+
+        $response = $this->postJson($this->apiRoute('/auth/register'), [
+            'email' => $email,
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ]);
+
+        $response->assertStatus(422)
+            ->assertJson([
+                'message' => 'The email has already been taken.'
+            ]);
+    }
+
+    #TODO add tests for other user create request rules
 }
