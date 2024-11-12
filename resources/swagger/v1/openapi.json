@@ -103,6 +103,43 @@
                 }
             }
         },
+        "/auth/logout": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout user and invalidate token",
+                "operationId": "54ebe8761f624404a0619002e3225589",
+                "responses": {
+                    "200": {
+                        "description": "Logout successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Successfully logged out."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            }
+        },
         "/auth/register": {
             "post": {
                 "tags": [
