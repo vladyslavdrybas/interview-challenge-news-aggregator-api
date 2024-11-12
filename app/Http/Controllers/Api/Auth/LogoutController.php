@@ -35,6 +35,8 @@ class LogoutController extends Controller
     )]
     public function destroy(Request $request): JsonResponse
     {
+        # remove all access tokens for the user
+        # we can split this on two methods "logout from all devices" and "logout from the current"
         $request->user()->tokens()->delete();
 
         return response()->json(['message' => 'Successfully logged out.']);
