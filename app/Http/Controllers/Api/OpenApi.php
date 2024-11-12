@@ -45,6 +45,19 @@ use OpenApi\Attributes as OA;
                     )
                 )
             ),
+            'NotFound' => new OA\Response(
+                response: 404,
+                description: 'Not found',
+                content: new OA\MediaType(
+                    mediaType: 'application/json',
+                    schema: new OA\Schema(
+                        properties: [
+                            new OA\Property(property: 'message', type: 'string', example: 'Not found')
+                        ],
+                        type: 'object'
+                    )
+                )
+            ),
             'UnprocessableEntity' => new OA\Response(
                 response: 422,
                 description: 'Unprocessable Entity',

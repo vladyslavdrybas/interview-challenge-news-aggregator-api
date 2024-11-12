@@ -53,47 +53,33 @@
                 ]
             }
         },
-        "/auth/password-reset": {
+        "/auth/password-update": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Reset user password and issue new token",
-                "operationId": "4eeba56257ba02a295f5357a3e187bdd",
+                "summary": "Update password and issue new token",
+                "operationId": "a03a68592fa705594823d9b5c0098565",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "password_current",
-                                    "password"
-                                ],
-                                "properties": {
-                                    "password_current": {
-                                        "type": "string",
-                                        "format": "password"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "format": "newpassword"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/PasswordUpdateRequest"
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "Password reset successfully.",
+                        "description": "Password update successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Password reset successfully."
+                                            "example": "Password update successfully."
                                         },
                                         "token": {
                                             "type": "string",
@@ -122,6 +108,36 @@
                         }
                     }
                 ]
+            }
+        },
+        "/auth/password-forgot": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Request password reset link",
+                "operationId": "1cd4378d99becb951da6387b593de115",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ForgotPasswordRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Reset link sent successfully."
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    }
+                }
             }
         },
         "/auth/login": {
@@ -260,6 +276,19 @@
     },
     "components": {
         "schemas": {
+            "ForgotPasswordRequest": {
+                "required": [
+                    "email"
+                ],
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "johndoe@example.com"
+                    }
+                },
+                "type": "object"
+            },
             "LoginRequest": {
                 "required": [
                     "email",
@@ -279,7 +308,7 @@
                 },
                 "type": "object"
             },
-            "PasswordResetRequest": {
+            "PasswordUpdateRequest": {
                 "required": [
                     "password_current",
                     "password"
@@ -353,6 +382,22 @@
                                 "message": {
                                     "type": "string",
                                     "example": "Unauthorized"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "Not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Not found"
                                 }
                             },
                             "type": "object"
