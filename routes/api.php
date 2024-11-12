@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ApiHomeController;
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,5 @@ Route::prefix('/v'. config('app.api.version'))
     ->middleware(['auth:sanctum'])
     ->group(function () {
         Route::get('/', [ApiHomeController::class, 'index'])->name('api.home');
+        Route::get('/auth/logout', [LogoutController::class, 'destroy'])->name('api.auth.logout');
     });
