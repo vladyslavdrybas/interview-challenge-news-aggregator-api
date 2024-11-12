@@ -6,27 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OA;
 
-#[OA\Info(
-    version: '1',
-    description: 'API for news aggregator challenge.',
-    title: 'Laravel API'
-)]
-
-#[OA\Server(
-    url: 'http://localhost:8090/api/v1',
-    description: 'Main API'
-)]
-
-#[OA\SecurityScheme(
-    securityScheme: 'BearerAuth',
-    type: 'http',
-    description: 'Bearer api token authentication',
-    name: 'bearerAuth',
-    in: 'header',
-    bearerFormat: 'bearerToken',
-    scheme: 'bearer'
-)]
-
 class ApiHomeController extends Controller
 {
     #[OA\Get(
@@ -34,7 +13,7 @@ class ApiHomeController extends Controller
         description: 'Returns a welcome message for the API',
         summary: 'Welcome Message',
         security: [
-            'bearerAuth'
+            ['bearerHttpAuthentication' => new OA\SecurityScheme(ref: '#/components/securitySchemes/bearerHttpAuthentication')],
         ],
         tags: ['Home'],
         responses: [
@@ -46,7 +25,9 @@ class ApiHomeController extends Controller
                         new OA\Property(property: 'message', type: 'string', example: 'Welcome to the API!')
                     ]
                 )
-            )
+            ),
+            new OA\Response(ref: '#/components/responses/400', response: 400),
+            new OA\Response(ref: '#/components/responses/401', response: 401),
         ]
     )]
     public function index()

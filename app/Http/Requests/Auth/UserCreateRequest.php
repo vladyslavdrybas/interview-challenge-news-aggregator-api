@@ -6,12 +6,21 @@ use App\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules;
+use OpenApi\Attributes as OA;
 
+#[OA\Schema(
+    schema: 'UserCreateRequest',
+    required: ['email', 'password'],
+    properties: [
+        new OA\Property(property: 'name', type: 'string', example: 'John Doe'),
+        new OA\Property(property: 'email', type: 'string', format: 'email', example: 'johndoe@example.com'),
+        new OA\Property(property: 'password', type: 'string', format: 'password', example: 'password'),
+        new OA\Property(property: 'password_confirmation', type: 'string', format: 'password', example: 'password'),
+    ],
+    type: 'object'
+)]
 class UserCreateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
