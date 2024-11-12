@@ -29,7 +29,6 @@ class LogoutController extends Controller
                     ]
                 )
             ),
-            new OA\Response(response: 200, description: 'Successfully logged out'),
             new OA\Response(response: 401, description: 'Unauthorized')
         ]
     )]
