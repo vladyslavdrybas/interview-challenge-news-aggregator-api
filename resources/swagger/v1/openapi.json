@@ -53,6 +53,77 @@
                 ]
             }
         },
+        "/auth/password-reset": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Reset user password and issue new token",
+                "operationId": "4eeba56257ba02a295f5357a3e187bdd",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "password_current",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "password_current": {
+                                        "type": "string",
+                                        "format": "password"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "newpassword"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Password reset successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Password reset successfully."
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "25|GRKiThbSCUPdgA1VDqXXzC6iEk24Ue3gBvFhOQSL0a3c51e5"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            }
+        },
         "/auth/login": {
             "post": {
                 "tags": [
@@ -204,6 +275,25 @@
                         "type": "string",
                         "format": "password",
                         "example": "password"
+                    }
+                },
+                "type": "object"
+            },
+            "PasswordResetRequest": {
+                "required": [
+                    "password_current",
+                    "password"
+                ],
+                "properties": {
+                    "password_current": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "password"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "newpassword"
                     }
                 },
                 "type": "object"
