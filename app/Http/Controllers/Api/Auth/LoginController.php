@@ -55,7 +55,7 @@ class LoginController extends Controller
         }
 
         // Generate the token using Sanctum
-        $token = $user->createToken(md5(config('app.key')))->plainTextToken;
+        $token = $user->createToken(md5(config('app.key')), ['*'], now()->addWeek())->plainTextToken;
 
         // Return the token as a response
         return response()->json([
