@@ -1,0 +1,1581 @@
+{
+	"info": {
+		"_postman_id": "ed78bf86-9740-4657-8d8f-b45c12fe3349",
+		"name": "LaravelChallenge News Aggregator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "133025"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Auth Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth Password Forgot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"johndoe@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/auth/password-forgot",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"password-forgot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth Password Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "24|jICUZSjevmIdIieMFdXQu22y4rL8NjLhbnySsnUQ69fc42b3",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password_current\": \"newpassword\",\n  \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/auth/password-reset",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"password-reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "20|MchfezzxyW3GOpdKPI9DkbodMJXrRgo7o8DKAagjd2eab663",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Preferences",
+			"item": [
+				{
+					"name": "Create Preferences",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "32|XG4dM1PUDSxADDQk7rxgPkcyhDeXgYlKWkzuQD3y8d243408",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"some title prefrenece 7\",\n    \"categories\": [197],\n    \"authors\": [1],\n    \"sources\": [1]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/user/preferences",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"preferences"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Encoding",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/news-sources?page=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"news-sources"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8090"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.13"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 13 Nov 2024 13:14:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"list\",\n    \"pagination\": {\n        \"current_page\": 2,\n        \"total_pages\": 2,\n        \"total_items\": 16\n    },\n    \"data\": [\n        {\n            \"id\": 11,\n            \"slug\": \"bindery-worker\",\n            \"title\": \"Bindery Worker\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 12,\n            \"slug\": \"physical-therapist\",\n            \"title\": \"Physical Therapist\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 13,\n            \"slug\": \"human-resource-manager\",\n            \"title\": \"Human Resource Manager\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 14,\n            \"slug\": \"mine-cutting-machine-operator\",\n            \"title\": \"Mine Cutting Machine Operator\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 15,\n            \"slug\": \"typesetter\",\n            \"title\": \"Typesetter\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        },\n        {\n            \"id\": 16,\n            \"slug\": \"electrician\",\n            \"title\": \"Electrician\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Preferences",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "32|XG4dM1PUDSxADDQk7rxgPkcyhDeXgYlKWkzuQD3y8d243408",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"some title prefrenece 2\",\n    \"categories\": [197],\n    \"authors\": [1],\n    \"sources\": [1,4]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/user/preferences/40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"preferences",
+								"40"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Encoding",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/news-sources?page=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"news-sources"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8090"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.13"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 13 Nov 2024 13:14:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"list\",\n    \"pagination\": {\n        \"current_page\": 2,\n        \"total_pages\": 2,\n        \"total_items\": 16\n    },\n    \"data\": [\n        {\n            \"id\": 11,\n            \"slug\": \"bindery-worker\",\n            \"title\": \"Bindery Worker\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 12,\n            \"slug\": \"physical-therapist\",\n            \"title\": \"Physical Therapist\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 13,\n            \"slug\": \"human-resource-manager\",\n            \"title\": \"Human Resource Manager\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 14,\n            \"slug\": \"mine-cutting-machine-operator\",\n            \"title\": \"Mine Cutting Machine Operator\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 15,\n            \"slug\": \"typesetter\",\n            \"title\": \"Typesetter\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        },\n        {\n            \"id\": 16,\n            \"slug\": \"electrician\",\n            \"title\": \"Electrician\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "List Preferences",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "32|XG4dM1PUDSxADDQk7rxgPkcyhDeXgYlKWkzuQD3y8d243408",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/user/preferences",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"preferences"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Encoding",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/news-sources?page=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"news-sources"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8090"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.13"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 13 Nov 2024 13:14:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"list\",\n    \"pagination\": {\n        \"current_page\": 2,\n        \"total_pages\": 2,\n        \"total_items\": 16\n    },\n    \"data\": [\n        {\n            \"id\": 11,\n            \"slug\": \"bindery-worker\",\n            \"title\": \"Bindery Worker\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 12,\n            \"slug\": \"physical-therapist\",\n            \"title\": \"Physical Therapist\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 13,\n            \"slug\": \"human-resource-manager\",\n            \"title\": \"Human Resource Manager\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 14,\n            \"slug\": \"mine-cutting-machine-operator\",\n            \"title\": \"Mine Cutting Machine Operator\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 15,\n            \"slug\": \"typesetter\",\n            \"title\": \"Typesetter\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        },\n        {\n            \"id\": 16,\n            \"slug\": \"electrician\",\n            \"title\": \"Electrician\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Destroy Preferences",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "32|XG4dM1PUDSxADDQk7rxgPkcyhDeXgYlKWkzuQD3y8d243408",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/user/preferences/35",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"preferences",
+								"35"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Encoding",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/news-sources?page=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"news-sources"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8090"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.13"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 13 Nov 2024 13:14:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"list\",\n    \"pagination\": {\n        \"current_page\": 2,\n        \"total_pages\": 2,\n        \"total_items\": 16\n    },\n    \"data\": [\n        {\n            \"id\": 11,\n            \"slug\": \"bindery-worker\",\n            \"title\": \"Bindery Worker\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 12,\n            \"slug\": \"physical-therapist\",\n            \"title\": \"Physical Therapist\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 13,\n            \"slug\": \"human-resource-manager\",\n            \"title\": \"Human Resource Manager\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 14,\n            \"slug\": \"mine-cutting-machine-operator\",\n            \"title\": \"Mine Cutting Machine Operator\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 15,\n            \"slug\": \"typesetter\",\n            \"title\": \"Typesetter\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        },\n        {\n            \"id\": 16,\n            \"slug\": \"electrician\",\n            \"title\": \"Electrician\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Show Preferences",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "32|XG4dM1PUDSxADDQk7rxgPkcyhDeXgYlKWkzuQD3y8d243408",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/user/preferences/40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"preferences",
+								"40"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Encoding",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/news-sources?page=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"news-sources"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8090"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.13"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 13 Nov 2024 13:14:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"list\",\n    \"pagination\": {\n        \"current_page\": 2,\n        \"total_pages\": 2,\n        \"total_items\": 16\n    },\n    \"data\": [\n        {\n            \"id\": 11,\n            \"slug\": \"bindery-worker\",\n            \"title\": \"Bindery Worker\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 12,\n            \"slug\": \"physical-therapist\",\n            \"title\": \"Physical Therapist\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 13,\n            \"slug\": \"human-resource-manager\",\n            \"title\": \"Human Resource Manager\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 14,\n            \"slug\": \"mine-cutting-machine-operator\",\n            \"title\": \"Mine Cutting Machine Operator\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 15,\n            \"slug\": \"typesetter\",\n            \"title\": \"Typesetter\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        },\n        {\n            \"id\": 16,\n            \"slug\": \"electrician\",\n            \"title\": \"Electrician\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Api Home",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "20|MchfezzxyW3GOpdKPI9DkbodMJXrRgo7o8DKAagjd2eab663",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/api/v1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LIST News Sources",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "32|XG4dM1PUDSxADDQk7rxgPkcyhDeXgYlKWkzuQD3y8d243408",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/api/v1/news-sources?page=2&per_page=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"news-sources"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "per_page",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/news-sources?page=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"news-sources"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8090"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.13"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 13 Nov 2024 13:14:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"type\": \"list\",\n    \"pagination\": {\n        \"current_page\": 2,\n        \"total_pages\": 2,\n        \"total_items\": 16\n    },\n    \"data\": [\n        {\n            \"id\": 11,\n            \"slug\": \"bindery-worker\",\n            \"title\": \"Bindery Worker\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 12,\n            \"slug\": \"physical-therapist\",\n            \"title\": \"Physical Therapist\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 13,\n            \"slug\": \"human-resource-manager\",\n            \"title\": \"Human Resource Manager\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 14,\n            \"slug\": \"mine-cutting-machine-operator\",\n            \"title\": \"Mine Cutting Machine Operator\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 15,\n            \"slug\": \"typesetter\",\n            \"title\": \"Typesetter\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        },\n        {\n            \"id\": 16,\n            \"slug\": \"electrician\",\n            \"title\": \"Electrician\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "LIST News Categories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "32|XG4dM1PUDSxADDQk7rxgPkcyhDeXgYlKWkzuQD3y8d243408",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/api/v1/news-categories?page=1&per_page=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"news-categories"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "per_page",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/news-sources?page=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"news-sources"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8090"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.13"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 13 Nov 2024 13:14:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"type\": \"list\",\n    \"pagination\": {\n        \"current_page\": 2,\n        \"total_pages\": 2,\n        \"total_items\": 16\n    },\n    \"data\": [\n        {\n            \"id\": 11,\n            \"slug\": \"bindery-worker\",\n            \"title\": \"Bindery Worker\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 12,\n            \"slug\": \"physical-therapist\",\n            \"title\": \"Physical Therapist\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 13,\n            \"slug\": \"human-resource-manager\",\n            \"title\": \"Human Resource Manager\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 14,\n            \"slug\": \"mine-cutting-machine-operator\",\n            \"title\": \"Mine Cutting Machine Operator\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 15,\n            \"slug\": \"typesetter\",\n            \"title\": \"Typesetter\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        },\n        {\n            \"id\": 16,\n            \"slug\": \"electrician\",\n            \"title\": \"Electrician\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "LIST News Authors",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "32|XG4dM1PUDSxADDQk7rxgPkcyhDeXgYlKWkzuQD3y8d243408",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/api/v1/news-authors?page=1&per_page=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"news-authors"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "per_page",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/news-sources?page=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"news-sources"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8090"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.13"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 13 Nov 2024 13:14:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"type\": \"list\",\n    \"pagination\": {\n        \"current_page\": 2,\n        \"total_pages\": 2,\n        \"total_items\": 16\n    },\n    \"data\": [\n        {\n            \"id\": 11,\n            \"slug\": \"bindery-worker\",\n            \"title\": \"Bindery Worker\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 12,\n            \"slug\": \"physical-therapist\",\n            \"title\": \"Physical Therapist\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 13,\n            \"slug\": \"human-resource-manager\",\n            \"title\": \"Human Resource Manager\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 14,\n            \"slug\": \"mine-cutting-machine-operator\",\n            \"title\": \"Mine Cutting Machine Operator\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 15,\n            \"slug\": \"typesetter\",\n            \"title\": \"Typesetter\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        },\n        {\n            \"id\": 16,\n            \"slug\": \"electrician\",\n            \"title\": \"Electrician\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Object Article",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "32|XG4dM1PUDSxADDQk7rxgPkcyhDeXgYlKWkzuQD3y8d243408",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/api/v1/articles/96",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"articles",
+						"96"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/news-sources?page=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"news-sources"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8090"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.13"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 13 Nov 2024 13:14:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"type\": \"list\",\n    \"pagination\": {\n        \"current_page\": 2,\n        \"total_pages\": 2,\n        \"total_items\": 16\n    },\n    \"data\": [\n        {\n            \"id\": 11,\n            \"slug\": \"bindery-worker\",\n            \"title\": \"Bindery Worker\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 12,\n            \"slug\": \"physical-therapist\",\n            \"title\": \"Physical Therapist\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 13,\n            \"slug\": \"human-resource-manager\",\n            \"title\": \"Human Resource Manager\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 14,\n            \"slug\": \"mine-cutting-machine-operator\",\n            \"title\": \"Mine Cutting Machine Operator\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 15,\n            \"slug\": \"typesetter\",\n            \"title\": \"Typesetter\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        },\n        {\n            \"id\": 16,\n            \"slug\": \"electrician\",\n            \"title\": \"Electrician\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "LIST Articles",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "32|XG4dM1PUDSxADDQk7rxgPkcyhDeXgYlKWkzuQD3y8d243408",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/api/v1/articles?categories[]=1971&categories[]=198&sources[]=15&authors[]=51",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"articles"
+					],
+					"query": [
+						{
+							"key": "categories[]",
+							"value": "1971"
+						},
+						{
+							"key": "categories[]",
+							"value": "198"
+						},
+						{
+							"key": "sources[]",
+							"value": "15"
+						},
+						{
+							"key": "authors[]",
+							"value": "51"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/news-sources?page=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"news-sources"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8090"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.13"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 13 Nov 2024 13:14:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"type\": \"list\",\n    \"pagination\": {\n        \"current_page\": 2,\n        \"total_pages\": 2,\n        \"total_items\": 16\n    },\n    \"data\": [\n        {\n            \"id\": 11,\n            \"slug\": \"bindery-worker\",\n            \"title\": \"Bindery Worker\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 12,\n            \"slug\": \"physical-therapist\",\n            \"title\": \"Physical Therapist\",\n            \"created_at\": \"2024-11-13T13:05:45.000000Z\"\n        },\n        {\n            \"id\": 13,\n            \"slug\": \"human-resource-manager\",\n            \"title\": \"Human Resource Manager\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 14,\n            \"slug\": \"mine-cutting-machine-operator\",\n            \"title\": \"Mine Cutting Machine Operator\",\n            \"created_at\": \"2024-11-13T13:05:46.000000Z\"\n        },\n        {\n            \"id\": 15,\n            \"slug\": \"typesetter\",\n            \"title\": \"Typesetter\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        },\n        {\n            \"id\": 16,\n            \"slug\": \"electrician\",\n            \"title\": \"Electrician\",\n            \"created_at\": \"2024-11-13T13:05:47.000000Z\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	]
+}
