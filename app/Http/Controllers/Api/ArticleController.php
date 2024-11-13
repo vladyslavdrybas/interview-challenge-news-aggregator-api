@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Constants\AnswerType;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
@@ -29,15 +31,12 @@ class ArticleController extends Controller
      */
     public function show(int $id)
     {
-        $article = Article::find($id);
-
-        if (!$article) {
-            return response()->json(['message' => 'Not found.'], 404);
-        }
+        $article = Article::with(['categories', 'authors', 'source'])->findOrFail($id);
 
         return response()->json(
             [
-                'data' => $article,
+                'type' => AnswerType::OBJECT->value,
+                'data' => new ArticleResource($article),
             ]
         );
     }

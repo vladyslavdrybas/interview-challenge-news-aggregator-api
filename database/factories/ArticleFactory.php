@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Article;
+use App\Models\NewsSource;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use function fake;
 

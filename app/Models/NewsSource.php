@@ -37,4 +37,9 @@ class NewsSource extends Model
         'apikey',
         'base_url',
     ];
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
 }

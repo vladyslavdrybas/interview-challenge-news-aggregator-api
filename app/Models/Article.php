@@ -15,7 +15,18 @@ class Article extends Model
     // Specify the fillable attributes
     protected $fillable = ['title', 'content', 'published_at'];
 
-    // TODO many-many Category
-    // TODO many-many Author
-    // TODO many-one NewsSource
+    public function source()
+    {
+        return $this->belongsTo(NewsSource::class, 'news_source_id', 'id');
+    }
+
+    public function authors()
+    {
+        return $this->belongsToMany(NewsAuthor::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(NewsCategory::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Constants\AnswerType;
 use App\Models\Article;
 use App\Models\User;
 use Laravel\Sanctum\Sanctum;
@@ -25,6 +26,7 @@ class ArticlesTest extends TestCase
         $response->assertStatus(200)
             ->assertJson(
                 [
+                    'type' => AnswerType::OBJECT->value,
                     'data' => [
                         'id' => $article->id,
                         'title' => $article->title,

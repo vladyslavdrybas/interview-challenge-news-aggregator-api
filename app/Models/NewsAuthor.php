@@ -33,4 +33,9 @@ class NewsAuthor extends Model
         'updated_at',
         'created_at',
     ];
+
+    public function articles()
+    {
+        return $this->belongsToMany(Article::class);
+    }
 }
