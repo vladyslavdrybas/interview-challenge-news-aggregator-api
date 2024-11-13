@@ -127,4 +127,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'pagination' => [
+        'perPage' => env('APP_PAGINATION_PER_PAGE', 10),
+    ]
 ];

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Auth\CredentialsController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\NewsSourceController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v'. config('app.api.version') . '/auth')
@@ -28,7 +29,7 @@ Route::prefix('/v'. config('app.api.version'))
     ->group(function () {
         Route::get('/', [ApiHomeController::class, 'index'])->name('api.home');
 
-        Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('api.article.show');
+        Route::get('/news-sources', [NewsSourceController::class, 'index']);
     });
 
 Route::prefix('/v'. config('app.api.version') . '/articles')
