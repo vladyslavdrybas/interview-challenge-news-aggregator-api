@@ -40,6 +40,19 @@ use OpenApi\Attributes as OA;
             ),
         ],
         responses: [
+            'NoContent' => new OA\Response(
+                response: 204,
+                description: 'No Content',
+                content: new OA\MediaType(
+                    mediaType: 'application/json',
+                    schema: new OA\Schema(
+                        properties: [
+                            new OA\Property(property: 'message', type: 'string', example: 'No Content')
+                        ],
+                        type: 'object'
+                    )
+                )
+            ),
             'BadRequest' => new OA\Response(
                 response: 400,
                 description: 'Bad Request',
@@ -174,6 +187,13 @@ use OpenApi\Attributes as OA;
                 in: 'query',
                 required: false,
                 schema: new OA\Schema(type: 'string', format: 'date-time', example: '2021-01-01T00:00:00Z')
+            ),
+            'id' => new OA\Parameter(
+                name: 'id',
+                description: 'The ID of the entity',
+                in: 'path',
+                required: true,
+                schema: new OA\Schema(type: 'integer', example: 1)
             ),
         ],
         securitySchemes: [

@@ -17,8 +17,6 @@ class UserPreference extends Model
         'sources' => 'array|exists:news_sources,id',
     ];
 
-    public const UPDATE_RULES = self::CREATE_RULES;
-
     protected $table = 'user_preferences';
 
     protected $fillable = ['user_id', 'title', 'slug'];

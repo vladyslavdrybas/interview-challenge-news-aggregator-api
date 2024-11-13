@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(
-    schema: 'UserPreferenceRequest',
+    schema: 'UserUpdatePreferenceRequest',
     required: ['title'],
     properties: [
         new OA\Property(property: 'title', description: 'The title of the preference', type: 'string', example: 'User Preferences'),
@@ -19,7 +19,7 @@ use OpenApi\Attributes as OA;
     ],
     type: 'object'
 )]
-class UserPreferenceRequest extends FormRequest
+class UserUpdatePreferenceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -36,6 +36,12 @@ class UserPreferenceRequest extends FormRequest
      */
     public function rules(): array
     {
-        return UserPreference::CREATE_RULES;
+        $rules = UserPreference::CREATE_RULES;
+        if (!empty($rules['slug'])) {
+            $id = (int) $this->id;
+            $rules['slug'] = 'string|max:255|unique:user_preferences,slug,' . $id;
+        }
+
+        return $rules;
     }
 }

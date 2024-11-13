@@ -576,6 +576,204 @@
                     }
                 ]
             }
+        },
+        "/user/preferences": {
+            "get": {
+                "tags": [
+                    "User Preferences"
+                ],
+                "summary": "Retrieve the user preferences list.",
+                "operationId": "bdccd902fe917b748cf859f9985e8fd5",
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved user preferences list.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/UserPreferencesResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "User Preferences"
+                ],
+                "summary": "Create a new user preference.",
+                "operationId": "04d7a36b7b32219187848248dba8322d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserPreferenceRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successfully created a new user preference.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserPreferencesResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            }
+        },
+        "/user/preferences/{id}": {
+            "get": {
+                "tags": [
+                    "User Preferences"
+                ],
+                "summary": "Retrieve a specific user preference.",
+                "operationId": "3e74fe5e23d62b0b6039f30909666f2a",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the user preference.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserPreferencesResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "User Preferences"
+                ],
+                "summary": "Update an existing user preference.",
+                "operationId": "fad784fc7b8ede3097e1c5e630d3b88c",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserUpdatePreferenceRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated the user preference.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserPreferencesResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "User Preferences"
+                ],
+                "summary": "Delete a user preference.",
+                "operationId": "537eefd804a65422a8fcff829859031f",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -690,6 +888,60 @@
                 },
                 "type": "object"
             },
+            "UserPreferenceRequest": {
+                "required": [
+                    "title"
+                ],
+                "properties": {
+                    "title": {
+                        "description": "The title of the preference",
+                        "type": "string",
+                        "example": "User Preferences"
+                    },
+                    "slug": {
+                        "description": "The slug for the preference",
+                        "type": "string",
+                        "example": "user-preferences-slug"
+                    },
+                    "categories": {
+                        "$ref": "#/components/schemas/IntegerArray"
+                    },
+                    "sources": {
+                        "$ref": "#/components/schemas/IntegerArray"
+                    },
+                    "authors": {
+                        "$ref": "#/components/schemas/IntegerArray"
+                    }
+                },
+                "type": "object"
+            },
+            "UserUpdatePreferenceRequest": {
+                "required": [
+                    "title"
+                ],
+                "properties": {
+                    "title": {
+                        "description": "The title of the preference",
+                        "type": "string",
+                        "example": "User Preferences"
+                    },
+                    "slug": {
+                        "description": "The slug for the preference",
+                        "type": "string",
+                        "example": "user-preferences-slug"
+                    },
+                    "categories": {
+                        "$ref": "#/components/schemas/IntegerArray"
+                    },
+                    "sources": {
+                        "$ref": "#/components/schemas/IntegerArray"
+                    },
+                    "authors": {
+                        "$ref": "#/components/schemas/IntegerArray"
+                    }
+                },
+                "type": "object"
+            },
             "ArticleResource": {
                 "properties": {
                     "id": {
@@ -767,6 +1019,38 @@
                 },
                 "type": "object"
             },
+            "UserPreferencesResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "slug": {
+                        "type": "string"
+                    },
+                    "categories": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NewsCategoryResource"
+                        }
+                    },
+                    "authors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NewsAuthorResource"
+                        }
+                    },
+                    "sources": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NewsSourceResource"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "NewsAuthor": {
                 "properties": {
                     "id": {
@@ -825,6 +1109,22 @@
             }
         },
         "responses": {
+            "204": {
+                "description": "No Content",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "No Content"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
             "400": {
                 "description": "Bad Request",
                 "content": {
@@ -1001,6 +1301,16 @@
                     "format": "date-time",
                     "example": "2021-01-01T00:00:00Z"
                 }
+            },
+            "id": {
+                "name": "id",
+                "in": "path",
+                "description": "The ID of the entity",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": 1
+                }
             }
         },
         "securitySchemes": {
@@ -1030,6 +1340,10 @@
         {
             "name": "Sources",
             "description": "Sources"
+        },
+        {
+            "name": "User Preferences",
+            "description": "User Preferences"
         }
     ]
 }
