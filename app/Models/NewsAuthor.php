@@ -38,4 +38,9 @@ class NewsAuthor extends Model
     {
         return $this->belongsToMany(Article::class);
     }
+
+    public function userPreferences()
+    {
+        return $this->belongsToMany(UserPreference::class, 'user_preference_news_author');
+    }
 }

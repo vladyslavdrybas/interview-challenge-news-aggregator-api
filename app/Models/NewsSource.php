@@ -42,4 +42,9 @@ class NewsSource extends Model
     {
         return $this->hasMany(Article::class);
     }
+
+    public function userPreferences()
+    {
+        return $this->belongsToMany(UserPreference::class, 'user_preference_news_source');
+    }
 }
