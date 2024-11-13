@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\ModelFactories\NewsSourceModelFactory;
 use App\Models\NewsSource;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
