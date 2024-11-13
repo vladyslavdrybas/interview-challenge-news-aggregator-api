@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApiHomeController;
+use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\Auth\CredentialsController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
@@ -26,4 +27,12 @@ Route::prefix('/v'. config('app.api.version'))
     ->middleware(['auth:sanctum'])
     ->group(function () {
         Route::get('/', [ApiHomeController::class, 'index'])->name('api.home');
+
+        Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('api.article.show');
+    });
+
+Route::prefix('/v'. config('app.api.version') . '/articles')
+    ->middleware(['auth:sanctum'])
+    ->group(function () {
+        Route::get('/{id}', [ArticleController::class, 'show'])->name('api.article.show');
     });
