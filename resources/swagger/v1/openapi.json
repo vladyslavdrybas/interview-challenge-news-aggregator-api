@@ -273,6 +273,63 @@
                 }
             }
         },
+        "/news-authors": {
+            "get": {
+                "tags": [
+                    "Sources"
+                ],
+                "summary": "Retrieve all news authors with pagination.",
+                "operationId": "6badf43ec6c3e9d23a7b931847ab0d86",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/per_page"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved news authors.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "example": "list"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/NewsAuthor"
+                                            }
+                                        },
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/PaginationInfo"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            }
+        },
         "/news-categories": {
             "get": {
                 "tags": [
@@ -482,6 +539,23 @@
                         "type": "string",
                         "format": "password",
                         "example": "password"
+                    }
+                },
+                "type": "object"
+            },
+            "NewsAuthor": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "slug": {
+                        "type": "string",
+                        "example": "neil-degrasse-tyson"
+                    },
+                    "full_name": {
+                        "type": "string",
+                        "example": "Neil deGrasse Tyson"
                     }
                 },
                 "type": "object"
