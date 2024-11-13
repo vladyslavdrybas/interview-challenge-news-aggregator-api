@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\NewsAuthorController;
 use App\Http\Controllers\Api\NewsCategoryController;
 use App\Http\Controllers\Api\NewsSourceController;
+use App\Http\Controllers\Api\UserPreferenceController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v'. config('app.api.version') . '/auth')
@@ -41,4 +42,14 @@ Route::prefix('/v'. config('app.api.version') . '/articles')
     ->group(function () {
         Route::get('/', [ArticleController::class, 'index'])->name('api.articles');
         Route::get('/{id}', [ArticleController::class, 'show'])->name('api.articles.show');
+    });
+
+Route::prefix('/v'. config('app.api.version') . '/user/preferences')
+    ->middleware('auth:sanctum')
+    ->group(function () {
+        Route::get('/', [UserPreferenceController::class, 'index'])->name('api.user.preferences.list');
+        Route::post('/', [UserPreferenceController::class, 'store'])->name('api.user.preferences.store');
+        Route::get('{id}', [UserPreferenceController::class, 'show'])->name('api.user.preferences.show');
+        Route::put('{id}', [UserPreferenceController::class, 'update'])->name('api.user.preferences.update');
+        Route::delete('{id}', [UserPreferenceController::class, 'destroy'])->name('api.user.preferences.destroy');
     });

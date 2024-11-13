@@ -5,9 +5,11 @@ namespace App\Providers;
 use App\Models\NewsAuthor;
 use App\Models\NewsCategory;
 use App\Models\NewsSource;
+use App\Models\UserPreference;
 use App\Observers\NewsAuthorObserver;
 use App\Observers\NewsCategoryObserver;
 use App\Observers\NewsSourceObserver;
+use App\Observers\UserPreferenceObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
         NewsSource::observe(NewsSourceObserver::class);
         NewsCategory::observe(NewsCategoryObserver::class);
         NewsAuthor::observe(NewsAuthorObserver::class);
+        UserPreference::observe(UserPreferenceObserver::class);
     }
 }

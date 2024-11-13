@@ -9,8 +9,8 @@ class NewsSourceObserver
 {
     public function saving(NewsSource $newsSource): void
     {
-        if (null === ($newsSource->slug ?? null)
-            && null !== ($newsSource->title ?? null)
+        if (empty($newsSource->slug)
+            && !empty($newsSource->title)
         ) {
             $newsSource->slug = Str::slug($newsSource->title);
         }
