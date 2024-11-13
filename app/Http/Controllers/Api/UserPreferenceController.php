@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\UserPreference;
-use Illuminate\Http\Request;
+use App\Http\Requests\UserPreferenceRequest;
+use function auth;
 
 class UserPreferenceController extends Controller
 {
     public function index()
     {
-        return response()->json(
-            auth()->user()->preferences()->get()
-        );
+        $preferences = auth()->user()->preferences()->get();
+
+        return response()->json($preferences);
     }
 
-    public function store(Request $request)
+    public function store(UserPreferenceRequest $request)
     {
-        $validated = $request->validate(UserPreference::CREATE_RULES);
+        $validated = $request->validated();
 
         $preferences = auth()->user()->preferences()->create([
             'title' => $validated['title'],
@@ -31,16 +31,16 @@ class UserPreferenceController extends Controller
         return response()->json($preferences, 201);
     }
 
-    public function show(string $id)
+    public function show(int $id)
     {
         $preferences = auth()->user()->preferences()->findOrFail($id);
 
         return response()->json($preferences);
     }
 
-    public function update(Request $request, string $id)
+    public function update(UserPreferenceRequest $request, string $id)
     {
-        $validated = $request->validate(UserPreference::CREATE_RULES);
+        $validated = $request->validated();
 
         $preferences = auth()->user()->preferences()->findOrFail($id);
         $preferences->update($validated);
@@ -52,10 +52,11 @@ class UserPreferenceController extends Controller
         return response()->json($preferences);
     }
 
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
         $preferences = auth()->user()->preferences()->findOrFail($id);
         $preferences->delete();
+
         return response()->json(null, 204);
     }
 }
