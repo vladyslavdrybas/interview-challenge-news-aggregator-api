@@ -34,8 +34,8 @@ class ArticleHideCommand extends Command
             return;
         }
 
-        if ($article->is_hidden === false) {
-            $article->is_hidden = true;
+        if ($article->is_hidden === 0) {
+            $article->is_hidden = 1;
             $article->save();
 
             $this->info('Article field updated successfully.');
