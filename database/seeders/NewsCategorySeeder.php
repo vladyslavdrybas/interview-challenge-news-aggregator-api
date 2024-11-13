@@ -2,20 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Article;
 use App\Models\NewsCategory;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class NewsCategorySeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
     public function run(): void
     {
-        User::factory(10)->create();
-        Article::factory()->count(10)->create();
         NewsCategory::factory()->count(87)->create();
     }
 }

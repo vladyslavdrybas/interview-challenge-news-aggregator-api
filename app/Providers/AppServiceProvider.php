@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\NewsCategory;
 use App\Models\NewsSource;
+use App\Observers\NewsCategoryObserver;
 use App\Observers\NewsSourceObserver;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         NewsSource::observe(NewsSourceObserver::class);
+        NewsCategory::observe(NewsCategoryObserver::class);
     }
 }
