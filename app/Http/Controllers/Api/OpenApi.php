@@ -28,6 +28,11 @@ use OpenApi\Attributes as OA;
                 ],
                 type: 'object'
             ),
+            'IntegerArray' => new OA\Schema(
+                schema: 'IntegerArray',
+                type: 'array',
+                items: new OA\Items(type: 'integer', example: 1)
+            ),
         ],
         responses: [
             'BadRequest' => new OA\Response(
@@ -111,6 +116,38 @@ use OpenApi\Attributes as OA;
                 in: 'query',
                 required: false,
                 schema: new OA\Schema(type: 'integer', default: 10)
+            ),
+            'categories' => new OA\Parameter(
+                name: 'categories[]',
+                description: 'Filter articles by categories (array of category IDs)',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(ref: '#/components/schemas/IntegerArray')
+            ),
+            'sources' => new OA\Parameter(
+                name: 'sources[]',
+                description: 'Filter articles by news sources (array of source IDs)',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(ref: '#/components/schemas/IntegerArray')
+            ),
+            'authors' => new OA\Parameter(
+                name: 'authors[]',
+                description: 'Filter articles by authors (array of author IDs)',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(ref: '#/components/schemas/IntegerArray')
+            ),
+            'sort' => new OA\Parameter(
+                name: 'sort',
+                description: 'Order result.',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(
+                    type: 'string',
+                    enum: ['asc', 'desc'],
+                    example: 'desc'
+                )
             ),
         ],
         securitySchemes: [

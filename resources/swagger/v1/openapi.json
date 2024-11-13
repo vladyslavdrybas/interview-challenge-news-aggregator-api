@@ -53,6 +53,81 @@
                 ]
             }
         },
+        "/articles": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Retrieve articles with pagination and optional filters.",
+                "operationId": "20f46a4be21edb0179e4df7acaa45c18",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/categories[]"
+                    },
+                    {
+                        "$ref": "#/components/parameters/sources[]"
+                    },
+                    {
+                        "$ref": "#/components/parameters/authors[]"
+                    },
+                    {
+                        "$ref": "#/components/parameters/sort"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved articles.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "example": "list"
+                                        },
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/PaginationInfo"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ArticleResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            }
+        },
         "/articles/{id}": {
             "get": {
                 "tags": [
@@ -513,6 +588,13 @@
                 },
                 "type": "object"
             },
+            "IntegerArray": {
+                "type": "array",
+                "items": {
+                    "type": "integer",
+                    "example": 1
+                }
+            },
             "ForgotPasswordRequest": {
                 "required": [
                     "email"
@@ -830,6 +912,47 @@
                 "schema": {
                     "type": "integer",
                     "default": 10
+                }
+            },
+            "categories[]": {
+                "name": "categories[]",
+                "in": "query",
+                "description": "Filter articles by categories (array of category IDs)",
+                "required": false,
+                "schema": {
+                    "$ref": "#/components/schemas/IntegerArray"
+                }
+            },
+            "sources[]": {
+                "name": "sources[]",
+                "in": "query",
+                "description": "Filter articles by news sources (array of source IDs)",
+                "required": false,
+                "schema": {
+                    "$ref": "#/components/schemas/IntegerArray"
+                }
+            },
+            "authors[]": {
+                "name": "authors[]",
+                "in": "query",
+                "description": "Filter articles by authors (array of author IDs)",
+                "required": false,
+                "schema": {
+                    "$ref": "#/components/schemas/IntegerArray"
+                }
+            },
+            "sort": {
+                "name": "sort",
+                "in": "query",
+                "description": "Order result.",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "enum": [
+                        "asc",
+                        "desc"
+                    ],
+                    "example": "desc"
                 }
             }
         },
