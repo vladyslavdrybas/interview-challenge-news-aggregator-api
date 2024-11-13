@@ -273,6 +273,63 @@
                 }
             }
         },
+        "/news-categories": {
+            "get": {
+                "tags": [
+                    "Sources"
+                ],
+                "summary": "Retrieve all news categories with pagination.",
+                "operationId": "823b74f4b8c873a6605c403ed602b3da",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/per_page"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved news categories.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "example": "list"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/NewsCategory"
+                                            }
+                                        },
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/PaginationInfo"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            }
+        },
         "/news-sources": {
             "get": {
                 "tags": [
@@ -425,6 +482,23 @@
                         "type": "string",
                         "format": "password",
                         "example": "password"
+                    }
+                },
+                "type": "object"
+            },
+            "NewsCategory": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "slug": {
+                        "type": "string",
+                        "example": "it-backend"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "IT backend"
                     }
                 },
                 "type": "object"
