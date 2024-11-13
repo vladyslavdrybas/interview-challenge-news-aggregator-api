@@ -18,6 +18,17 @@ use OpenApi\Attributes as OA;
         ),
     ],
     components: new OA\Components(
+        schemas: [
+            'PaginationInfo' => new OA\Schema(
+                schema: 'PaginationInfo',
+                properties: [
+                    new OA\Property(property: 'current_page', type: 'integer', example: 1),
+                    new OA\Property(property: 'total_pages', type: 'integer', example: 10),
+                    new OA\Property(property: 'total_items', type: 'integer', example: 100),
+                ],
+                type: 'object'
+            ),
+        ],
         responses: [
             'BadRequest' => new OA\Response(
                 response: 400,
@@ -40,6 +51,19 @@ use OpenApi\Attributes as OA;
                     schema: new OA\Schema(
                         properties: [
                             new OA\Property(property: 'message', type: 'string', example: 'Unauthorized')
+                        ],
+                        type: 'object'
+                    )
+                )
+            ),
+            'Forbidden' => new OA\Response(
+                response: 403,
+                description: 'Forbidden',
+                content: new OA\MediaType(
+                    mediaType: 'application/json',
+                    schema: new OA\Schema(
+                        properties: [
+                            new OA\Property(property: 'message', type: 'string', example: 'Forbidden')
                         ],
                         type: 'object'
                     )
@@ -72,6 +96,22 @@ use OpenApi\Attributes as OA;
                     )
                 )
             )
+        ],
+        parameters: [
+            'page' => new OA\Parameter(
+                name: 'page',
+                description: 'Page number for pagination',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(type: 'integer', default: 1)
+            ),
+            'per_page' => new OA\Parameter(
+                name: 'per_page',
+                description: 'Number of items per page',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(type: 'integer', default: 10)
+            ),
         ],
         securitySchemes: [
             'bearerHttpAuthentication' => new OA\SecurityScheme(

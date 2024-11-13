@@ -272,10 +272,84 @@
                     }
                 }
             }
+        },
+        "/news-sources": {
+            "get": {
+                "tags": [
+                    "Sources"
+                ],
+                "summary": "Retrieve all news sources with pagination.",
+                "operationId": "589400fc0e0ee97cc2ed43c5b5a9cc51",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/per_page"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved news sources.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "example": "list"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/NewsSource"
+                                            }
+                                        },
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/PaginationInfo"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            }
         }
     },
     "components": {
         "schemas": {
+            "PaginationInfo": {
+                "properties": {
+                    "current_page": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "total_pages": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "total_items": {
+                        "type": "integer",
+                        "example": 100
+                    }
+                },
+                "type": "object"
+            },
             "ForgotPasswordRequest": {
                 "required": [
                     "email"
@@ -354,6 +428,28 @@
                     }
                 },
                 "type": "object"
+            },
+            "NewsSource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "slug": {
+                        "type": "string",
+                        "example": "news-api-1"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "News API 1"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-13T13:05:45.000000Z"
+                    }
+                },
+                "type": "object"
             }
         },
         "responses": {
@@ -382,6 +478,22 @@
                                 "message": {
                                     "type": "string",
                                     "example": "Unauthorized"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "403": {
+                "description": "Forbidden",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Forbidden"
                                 }
                             },
                             "type": "object"
@@ -425,6 +537,28 @@
                 }
             }
         },
+        "parameters": {
+            "page": {
+                "name": "page",
+                "in": "query",
+                "description": "Page number for pagination",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "default": 1
+                }
+            },
+            "per_page": {
+                "name": "per_page",
+                "in": "query",
+                "description": "Number of items per page",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "default": 10
+                }
+            }
+        },
         "securitySchemes": {
             "bearerHttpAuthentication": {
                 "type": "http",
@@ -444,6 +578,10 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Sources",
+            "description": "Sources"
         }
     ]
 }
