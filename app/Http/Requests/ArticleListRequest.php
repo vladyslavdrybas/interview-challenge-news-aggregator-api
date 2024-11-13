@@ -29,6 +29,10 @@ class ArticleListRequest extends FormRequest
             'authors' => 'nullable|array',
             'sources' => 'nullable|array',
             'sort' => 'nullable|in:asc,desc',
+            'keywords' => 'nullable|array',
+            'keywords.*' => 'nullable|string',
+            'start_at' => 'nullable|date',
+            'end_at' => 'nullable|date|after:start_date',
             // just uncomment below if you want to restrict the search for non-existing entities
 //            'categories.*' => 'nullable|integer|exists:news_categories,id',
 //            'authors.*' => 'nullable|integer|exists:news_authors,id',

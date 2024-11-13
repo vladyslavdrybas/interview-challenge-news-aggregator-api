@@ -33,6 +33,11 @@ use OpenApi\Attributes as OA;
                 type: 'array',
                 items: new OA\Items(type: 'integer', example: 1)
             ),
+            'StringArray' => new OA\Schema(
+                schema: 'StringArray',
+                type: 'array',
+                items: new OA\Items(type: 'string', example: 'keyword')
+            ),
         ],
         responses: [
             'BadRequest' => new OA\Response(
@@ -138,6 +143,13 @@ use OpenApi\Attributes as OA;
                 required: false,
                 schema: new OA\Schema(ref: '#/components/schemas/IntegerArray')
             ),
+            'keywords' => new OA\Parameter(
+                name: 'keywords[]',
+                description: 'Filter articles by keywords (array of string)',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(ref: '#/components/schemas/StringArray')
+            ),
             'sort' => new OA\Parameter(
                 name: 'sort',
                 description: 'Order result.',
@@ -148,6 +160,20 @@ use OpenApi\Attributes as OA;
                     enum: ['asc', 'desc'],
                     example: 'desc'
                 )
+            ),
+            'start_at' => new OA\Parameter(
+                name: 'start_at',
+                description: 'Filter published after this date (YYYY-MM-DDTHH:mm:ssZ)',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(type: 'string', format: 'date-time', example: '2021-01-01T00:00:00Z')
+            ),
+            'end_at' => new OA\Parameter(
+                name: 'end_at',
+                description: 'Filter published before this date (YYYY-MM-DDTHH:mm:ssZ)',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(type: 'string', format: 'date-time', example: '2021-01-01T00:00:00Z')
             ),
         ],
         securitySchemes: [

@@ -27,7 +27,10 @@ class ArticleController extends Controller
             new OA\Parameter(ref: '#/components/parameters/categories[]'),
             new OA\Parameter(ref: '#/components/parameters/sources[]'),
             new OA\Parameter(ref: '#/components/parameters/authors[]'),
+            new OA\Parameter(ref: '#/components/parameters/keywords[]'),
             new OA\Parameter(ref: '#/components/parameters/sort'),
+            new OA\Parameter(ref: '#/components/parameters/start_at'),
+            new OA\Parameter(ref: '#/components/parameters/end_at'),
         ],
         responses: [
             new OA\Response(
@@ -74,6 +77,23 @@ class ArticleController extends Controller
             $query->whereIn('news_source_id', $request->sources);
         }
 
+        if ($request->has('keywords')) {
+            $query->where(function ($q) use ($request) {
+                foreach ($request->keywords as $keyword) {
+                    $q->orWhere('title', 'like', '%' . $keyword . '%')
+                        ->orWhere('content', 'like', '%' . $keyword . '%');
+                }
+            });
+        }
+
+        if ($request->has('start_at')) {
+            $query->where('published_at', '>=', $request->start_at);
+        }
+
+        if ($request->has('end_at')) {
+            $query->where('published_at', '<=', $request->end_at);
+        }
+
         if ($request->has('sort')) {
             $query->orderBy('created_at', $request->sort);
         } else {
@@ -81,7 +101,10 @@ class ArticleController extends Controller
         }
 
         $perPage = min($request->query('per_page', config('app.pagination.perPage')), config('app.pagination.perPageMax'));
-        $data = $query->with(['categories', 'authors', 'source'])->where('is_hidden', '=', 0)->paginate($perPage);
+        $data = $query->with(['categories', 'authors', 'source'])
+            ->whereNotNull('news_source_id')
+            ->where('is_hidden', '=', 0)
+            ->paginate($perPage);
 
         // Return paginated results using ArticleResource
         return response()->json([
