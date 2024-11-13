@@ -53,6 +53,55 @@
                 ]
             }
         },
+        "/articles/{id}": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Retrieve a specific article by ID with all relationships",
+                "operationId": "90f7485e28819211cd54fc2b866bd33c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved article.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ArticleResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            }
+        },
         "/auth/password-update": {
             "post": {
                 "tags": [
@@ -543,6 +592,83 @@
                 },
                 "type": "object"
             },
+            "ArticleResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Particle launches an AI news app to help publishers, instead of just stealing their work"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "From the consumers’ perspective, the core idea behind Particle is to help readers better understand the news with the help of AI technology. More than just summarizing stories into key bullet points for quick catch-ups, Particle offers a variety of clever features that let you approach the news in different ways."
+                    },
+                    "published_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-13T13:05:45.000000Z",
+                        "nullable": true
+                    },
+                    "source": {
+                        "$ref": "#/components/schemas/NewsSourceResource"
+                    },
+                    "categories": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NewsCategoryResource"
+                        }
+                    },
+                    "authors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NewsAuthorResource"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "NewsAuthorResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 42
+                    },
+                    "full_name": {
+                        "type": "string",
+                        "example": "Robert Cecil Martin"
+                    }
+                },
+                "type": "object"
+            },
+            "NewsCategoryResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Clean Code"
+                    }
+                },
+                "type": "object"
+            },
+            "NewsSourceResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 11
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "TechCrunch"
+                    }
+                },
+                "type": "object"
+            },
             "NewsAuthor": {
                 "properties": {
                     "id": {
@@ -722,6 +848,10 @@
         {
             "name": "Home",
             "description": "Home"
+        },
+        {
+            "name": "Articles",
+            "description": "Articles"
         },
         {
             "name": "Auth",
