@@ -39,5 +39,6 @@ Route::prefix('/v'. config('app.api.version'))
 Route::prefix('/v'. config('app.api.version') . '/articles')
     ->middleware(['auth:sanctum'])
     ->group(function () {
-        Route::get('/{id}', [ArticleController::class, 'show'])->name('api.article.show');
+        Route::get('/', [ArticleController::class, 'index'])->name('api.articles');
+        Route::get('/{id}', [ArticleController::class, 'show'])->name('api.articles.show');
     });

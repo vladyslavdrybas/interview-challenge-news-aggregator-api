@@ -129,5 +129,6 @@ return [
 
     'pagination' => [
         'perPage' => env('APP_PAGINATION_PER_PAGE', 10),
+        'perPageMax' => env('APP_PAGINATION_PER_PAGE_MAX', 25),
     ]
 ];

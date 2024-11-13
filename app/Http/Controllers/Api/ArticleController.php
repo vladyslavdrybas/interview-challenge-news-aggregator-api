@@ -4,20 +4,58 @@ namespace App\Http\Controllers\Api;
 
 use App\Constants\AnswerType;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ArticleListRequest;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use OpenApi\Attributes as OA;
+use function config;
 use function response;
 
 class ArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(ArticleListRequest $request)
     {
-        //
+        $request->validated();
+
+        // TODO move to a filter builder
+        $query = Article::query();
+
+        if ($request->has('categories')) {
+            $query->whereHas('categories', function ($q) use ($request) {
+                $q->whereIn('id', $request->categories);
+            });
+        }
+
+        if ($request->has('authors')) {
+            $query->whereHas('authors', function ($q) use ($request) {
+                $q->whereIn('id', $request->authors);
+            });
+        }
+
+        if ($request->has('sources')) {
+            $query->whereIn('news_source_id', $request->sources);
+        }
+
+        if ($request->has('sort')) {
+            $query->orderBy('created_at', $request->sort);
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        $perPage = min($request->query('per_page', config('app.pagination.perPage')), config('app.pagination.perPageMax'));
+        $data = $query->with(['categories', 'authors', 'source'])->where('is_hidden', '=', 0)->paginate($perPage);
+
+        // Return paginated results using ArticleResource
+        return response()->json([
+            'type' => AnswerType::LIST->value,
+            'pagination' => [
+                'current_page' => $data->currentPage(),
+                'total_pages' => $data->lastPage(),
+                'total_items' => $data->total(),
+            ],
+            'data' => ArticleResource::collection($data),
+        ]);
     }
 
     #[OA\Get(
