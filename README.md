@@ -9,8 +9,7 @@
 
 ## About Project
 
-Challenge task.
-Create API for News Aggregator.
+The challenge is to build a RESTful API for a news aggregator service that pulls articles from various sources and provides endpoints for a frontend application to consume.
 
 ## DISCLAIMER
 
@@ -33,15 +32,26 @@ guarantees of functionality or safety.
 Thank you for understanding!
 </span>
 
+## Documentation
+
+* [Installation](#installation)
+* [Getting Started](#getting-started)
+* [Queue and Job](#queue-and-job)
+* [Database](#database)
+* [Issues](#issues)
+* [Results](#results)
+* [YouTube](#results)
+
 ## Installation
 
-you can find all needed commands in the `Makefile`.
+you can find all commands in the `Makefile`.
 
 Required:
 1. be sure that you have `.env` file. you can copy and edit `.env.example`
 2. just run `make install`
+3. Get guardians [API key](https://open-platform.theguardian.com/documentation/)
 
-Set you SECRET API keys for news sources. Do not worry, you can do it later on news source creation. Or you can edit them manually in DB.
+Set your SECRET API keys for news sources. Do not worry, you can do it later on news source creation. Or you can edit them manually in DB.
 
 Optional:
 1. seed database `make db-seed`
@@ -50,10 +60,17 @@ Optional:
    2. `app:news-category:add {title} {slug?}`
    3. `app:news-source:add {title} {base_url} {apikey} {slug?}`
 
-## Documentation
+Default password for users `password`.
 
-On you local environment you can find all needed documentation.
-http://localhost:8090/api/docs#/
+## Getting Started
+
+In your local environment, you can find all the needed documentation and play around on the Swagger interface.
+Project home page will redirect you to the API.
+
+* Home http://localhost:8090
+* API Documentation http://localhost:8090/api/docs
+* Debugger http://localhost:8090/telescope/requests
+* [READ](https://github.com/vladyslavdrybas/interview-challenge-news-aggregator-api/tree/main/documentation) Design and Developing process
 
 ### Queue
 On prod and dev you can have tools to run multiple queues in the background.
@@ -65,9 +82,6 @@ Be sure to run:
 * `make run-storing-worker`
 
 ## Entrypoints
-* Home http://localhost:8090
-* API Documentation http://localhost:8090/api/docs
-* Debugger http://localhost:8090/telescope/requests
 
 ## Database
 ![database_schema.png](documentation/database_schema.png)
@@ -85,7 +99,9 @@ Temp fix
 * Confirm the change ls -la. You should see the group and user sail on all the files and folders.
 * Exit the container exit.
 
-## Tools & Packages
-* [zircote/swagger-php](https://zircote.github.io/swagger-php/guide/installation.html)
-* [laravel-swagger-ui](https://github.com/wotzebra/laravel-swagger-ui)
-* [docker swagger ui swaggerapi/swagger-ui](https://hub.docker.com/r/swaggerapi/swagger-ui)
+## Results
+
+In `about.pdf` file you can [read](https://github.com/vladyslavdrybas/interview-challenge-news-aggregator-api/blob/main/documentation/About.pdf) design and details.
+
+Watch project representation on [YouTube](https://youtu.be/s_4_o6lkSts)
+
