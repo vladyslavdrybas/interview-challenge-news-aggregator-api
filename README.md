@@ -12,9 +12,57 @@
 Challenge task.
 Create API for News Aggregator.
 
-## Deploy
+## DISCLAIMER
+
+<span style="color:#EEDD82; font-weight: bold; font-size: 16px;">This project is a personal pet project created solely for educational and study purposes.</span>
+
+The code provided in this repository is not intended for production or commercial use.
+Users are advised that the code may contain incomplete implementations, unoptimized features,
+or potential security vulnerabilities that have not been addressed.
+
+
+<span style="color:#EEDD82; font-weight: bold; font-size: 16px;">Important Note:</span> Any use of this code for production, commercial, or any critical purpose is
+strictly discouraged. The author accepts no responsibility for any issues or damages arising
+from the use of this code outside of its intended study and learning scope.
+
+By accessing or using any part of this project, you agree to use it solely for non-commercial,
+educational purposes and acknowledge that it is provided "as is" without any warranties or
+guarantees of functionality or safety.
+
+<span style="color:#EEDD82; font-weight: bold; font-size: 16px;">
+Thank you for understanding!
+</span>
+
+## Installation
+
 you can find all needed commands in the `Makefile`.
 
+Required:
+1. be sure that you have `.env` file. you can copy and edit `.env.example`
+2. just run `make install`
+
+Set you SECRET API keys for news sources. Do not worry, you can do it later on news source creation. Or you can edit them manually in DB.
+
+Optional:
+1. seed database `make db-seed`
+2. use commands to create data manually:
+   1. `app:news-author:add {full_name} {slug?}`
+   2. `app:news-category:add {title} {slug?}`
+   3. `app:news-source:add {title} {base_url} {apikey} {slug?}`
+
+## Documentation
+
+On you local environment you can find all needed documentation.
+http://localhost:8090/api/docs#/
+
+### Queue
+On prod and dev you can have tools to run multiple queues in the background.
+
+On this local environment version you should run each queue in a separate console tab.
+Be sure to run:
+* `make run-schedule-worker`
+* `make run-fetching-worker`
+* `make run-storing-worker`
 
 ## Entrypoints
 * Home http://localhost:8090
@@ -27,6 +75,8 @@ you can find all needed commands in the `Makefile`.
 ## Issues
 
 ### Permissions with Sail
+
+`If you have a problem accessing or editing some parts of the project.`
 
 Temp fix
 * In WSL2 jump into the docker container as root by running this command vendor/bin/sail root-shell.

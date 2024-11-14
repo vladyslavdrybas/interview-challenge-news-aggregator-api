@@ -10,6 +10,18 @@ install:
 	./vendor/bin/sail artisan migrate
 	./vendor/bin/sail artisan migrate --env=testing
 
+run-schedule-worker:
+	./vendor/bin/sail artisan schedule:work
+
+run-fetching-worker:
+	./vendor/bin/sail artisan queue:work redis --queue=news_fetching
+
+run-storing-worker:
+	./vendor/bin/sail artisan queue:work redis --queue=news_storing
+
+run-default-worker:
+	./vendor/bin/sail artisan queue:work redis
+
 # run project and recreate containers
 up:
 	./vendor/bin/sail up -d
@@ -28,6 +40,9 @@ down:
 
 test:
 	./vendor/bin/sail phpunit
+
+db-seed:
+	./vendor/bin/sail artisan db:seed
 
 # open container to run commands directly in container
 open-php:
