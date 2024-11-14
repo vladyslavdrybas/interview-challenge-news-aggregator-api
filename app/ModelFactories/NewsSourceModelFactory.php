@@ -11,6 +11,7 @@ class NewsSourceModelFactory extends AbstractModelFactory
     public const MODEL_CLASS = NewsSource::class;
     public const VALIDATION_RULES = NewsSource::CREATE_RULES;
 
+    // TODO secure apiKEY before storing
     public function __invoke(array $data): NewsSource
     {
         /** @var NewsSource $newsSource */
