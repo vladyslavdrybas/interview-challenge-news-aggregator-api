@@ -22,6 +22,9 @@ run-storing-worker:
 run-default-worker:
 	./vendor/bin/sail artisan queue:work redis
 
+jobs-failed-clean:
+	./vendor/bin/sail artisan queue:flush
+
 # run project and recreate containers
 up:
 	./vendor/bin/sail up -d

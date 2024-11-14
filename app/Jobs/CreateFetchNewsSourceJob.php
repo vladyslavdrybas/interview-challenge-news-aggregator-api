@@ -21,14 +21,17 @@ class CreateFetchNewsSourceJob implements ShouldQueue
 
     public function handle(NewsGrabberFacade $newsGrabber): void
     {
+        // TODO just logging example. remove it anytime.
+        Log::info('Just fyi some random log.' . __METHOD__);
+
         $apis = NewsSource::query()->whereNotNull('base_url')->whereNotNull('apikey')->get();
 
         foreach ($apis as $api) {
-            $dto = new NewsSourceDTO($api->base_url, $api->apikey, $api->slug, '');
-            $dto = $newsGrabber->setGrabStrategy($dto);
-            if ($newsGrabber->canGrab($dto)) {
-                Log::info(json_encode($dto));
-                FetchNewsSourceArticlesJob::dispatch($dto)->onQueue('news_fetching');
+            $newsSourceDTO = new NewsSourceDTO($api->base_url, $api->apikey, $api->slug, '');
+            $newsSourceDTO = $newsGrabber->setGrabStrategy($newsSourceDTO);
+            if ($newsGrabber->canGrab($newsSourceDTO)) {
+                Log::info(json_encode($newsSourceDTO));
+                FetchNewsSourceArticlesJob::dispatch($newsSourceDTO)->onQueue('news_fetching');
             }
         }
     }

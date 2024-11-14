@@ -2,29 +2,30 @@
 
 namespace App\Jobs;
 
+use App\DTO\ArticleDTO;
+use App\Services\NewsGrabber\DTO\FetchedArticleDTO;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class PrepareToStoreFetchedArticleJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(protected FetchedArticleDTO $dto) {}
 
-    /**
-     * Execute the job.
-     */
     public function handle(): void
     {
-        StoreFetchedArticleJob::dispatch()->onQueue('news_storing');
+        $articleDto = new ArticleDTO(
+            $this->dto->title,
+            $this->dto->sourceSlug,
+            $this->dto->content,
+            $this->dto->publishedAt
+        );
+
+        StoreFetchedArticleJob::dispatch($articleDto)->onQueue('news_storing');
     }
 }

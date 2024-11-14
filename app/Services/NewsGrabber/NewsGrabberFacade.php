@@ -6,7 +6,7 @@ namespace App\Services\NewsGrabber;
 use App\Services\NewsGrabber\Business\Detector\GrabStrategyDetector;
 use App\Services\NewsGrabber\Business\Detector\StrategyNames;
 use App\Services\NewsGrabber\Business\Grabbers\Grabber;
-use App\Services\NewsGrabber\DTO\FetchedNewsDto;
+use App\Services\NewsGrabber\DTO\FetchedNewsDTO;
 use App\Services\NewsGrabber\DTO\NewsSourceDTO;
 
 class NewsGrabberFacade
@@ -17,7 +17,7 @@ class NewsGrabberFacade
         protected GrabStrategyDetector $grabberStrategyDetector,
     ) {}
 
-    public function fetchNews(NewsSourceDTO $source): FetchedNewsDto
+    public function fetchNews(NewsSourceDTO $source): FetchedNewsDTO
     {
         return $this->grabber->fetch($source);
     }
