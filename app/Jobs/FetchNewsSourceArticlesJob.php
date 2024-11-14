@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Services\NewsGrabber\DTO\NewsSourceDTO;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
@@ -15,16 +16,15 @@ class FetchNewsSourceArticlesJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(
+        protected NewsSourceDTO $dto
+    ) {}
 
     /**
      * Execute the job.
      */
     public function handle(): void
     {
-        PrepareToStoreFetchedArticleJob::dispatch()->onQueue('news_storing');
+//        PrepareToStoreFetchedArticleJob::dispatch()->onQueue('news_storing');
     }
 }

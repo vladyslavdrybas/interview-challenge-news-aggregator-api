@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace App\DTO;
+namespace App\Services\NewsGrabber\DTO;
 
-class FetchNewsSourceDTO
+class NewsSourceDTO
 {
     public function __construct(
-        public int $source_id,
         public string $url,
         public string $apikey,
-        public string $strategy,
+        public ?string $slug = null,
+        public ?string $strategy = null,
     ) {}
 }
