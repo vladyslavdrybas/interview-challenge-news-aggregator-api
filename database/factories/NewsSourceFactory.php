@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use function config;
 use function fake;
+use function hash;
 use function uniqid;
 
 /**
@@ -21,10 +22,11 @@ class NewsSourceFactory extends Factory
      */
     public function definition(): array
     {
-        $title = fake()->jobTitle();
+        $title = fake()->unique()->jobTitle();
 
         return [
             'title' => $title,
+            'slug' => hash('sha512', uniqid(). Str::random(50)),
             'base_url' => config('app.url') . '/api/v1/fakenews/' . Str::slug($title),
             'apikey' => uniqid('key_', true),
         ];

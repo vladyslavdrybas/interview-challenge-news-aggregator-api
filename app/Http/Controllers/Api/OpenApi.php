@@ -156,6 +156,13 @@ use OpenApi\Attributes as OA;
                 required: false,
                 schema: new OA\Schema(ref: '#/components/schemas/IntegerArray')
             ),
+            'user_preferences' => new OA\Parameter(
+                name: 'user_preferences[]',
+                description: 'Apply user_preferences to filter articles',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(ref: '#/components/schemas/IntegerArray')
+            ),
             'keywords' => new OA\Parameter(
                 name: 'keywords[]',
                 description: 'Filter articles by keywords (array of string)',

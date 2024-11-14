@@ -9,6 +9,6 @@ class UserPreferenceSeeder extends Seeder
 {
     public function run(): void
     {
-        UserPreference::factory()->count(11)->create();
+        UserPreference::factory()->count(87)->create();
     }
 }

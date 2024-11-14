@@ -8,6 +8,9 @@ use App\Models\NewsSource;
 use App\Models\User;
 use App\Models\UserPreference;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+use function hash;
+use function uniqid;
 
 /**
  * @extends Factory<UserPreference>
@@ -18,20 +21,19 @@ class UserPreferenceFactory extends Factory
 
     public function definition()
     {
-
         return [
             'user_id' => User::inRandomOrder()->get()->first()->id,
-            'title' => $this->faker->word,
-            'slug' => $this->faker->slug,
+            'title' => $this->faker->unique()->word,
+            'slug' => hash('sha512', uniqid(). Str::random(50)),
         ];
     }
 
     public function configure()
     {
         return $this->afterCreating(function (UserPreference $preference) {
-            $categories = NewsCategory::inRandomOrder()->take(5)->pluck('id');
-            $authors = NewsAuthor::inRandomOrder()->take(3)->pluck('id');
-            $sources = NewsSource::inRandomOrder()->take(2)->pluck('id');
+            $categories = NewsCategory::inRandomOrder()->take(51)->pluck('id');
+            $authors = NewsAuthor::inRandomOrder()->take(21)->pluck('id');
+            $sources = NewsSource::inRandomOrder()->take(55)->pluck('id');
 
             $preference->categories()->attach($categories);
             $preference->authors()->attach($authors);

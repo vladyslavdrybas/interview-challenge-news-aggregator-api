@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\NewsSource;
 use Illuminate\Database\Seeder;
+use function uniqid;
 
 class NewsSourceSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class NewsSourceSeeder extends Seeder
      */
     public function run(): void
     {
-        NewsSource::factory()->count(12)->create();
+        NewsSource::factory()->count(97)->create();
     }
 }

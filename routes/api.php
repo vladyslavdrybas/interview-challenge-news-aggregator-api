@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\NewsAuthorController;
 use App\Http\Controllers\Api\NewsCategoryController;
 use App\Http\Controllers\Api\NewsSourceController;
+use App\Http\Controllers\Api\UserFeedController;
 use App\Http\Controllers\Api\UserPreferenceController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,7 @@ Route::prefix('/v'. config('app.api.version'))
         Route::get('/news-sources', [NewsSourceController::class, 'index']);
         Route::get('/news-categories', [NewsCategoryController::class, 'index']);
         Route::get('/news-authors', [NewsAuthorController::class, 'index']);
+        Route::get('/user/feed', [UserFeedController::class, 'index'])->name('api.user.feed');
     });
 
 Route::prefix('/v'. config('app.api.version') . '/articles')

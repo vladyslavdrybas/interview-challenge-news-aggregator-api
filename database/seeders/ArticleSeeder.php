@@ -15,20 +15,23 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        Article::factory()->count(3)->create()->each(function ($article) {
-            $newsSource = NewsSource::inRandomOrder()->first();
-            $categories = NewsCategory::inRandomOrder()->take(rand(1,17))->pluck('id');
-            $authors = NewsAuthor::inRandomOrder()->take(rand(1,3))->pluck('id');
+        Article::factory()->count(1511)
+            ->create()
+            ->each(function ($article) {
+                $newsSource = NewsSource::inRandomOrder()->first();
+                $categories = NewsCategory::inRandomOrder()->take(rand(3,27))->pluck('id');
+                $authors = NewsAuthor::inRandomOrder()->take(rand(1,7))->pluck('id');
 
-            // many-to-one
-            $article->source()->associate($newsSource);
-            $article->save();
+                // many-to-one
+                $article->source()->associate($newsSource);
+                $article->save();
 
-            // many-to-many
-            $article->categories()->attach($categories);
+                // many-to-many
+                $article->categories()->attach($categories);
 
-            // many-to-many
-            $article->authors()->attach($authors);
-        });
+                // many-to-many
+                $article->authors()->attach($authors);
+            })
+        ;
     }
 }
