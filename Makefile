@@ -53,3 +53,11 @@ open-php:
 
 api-documentation-generate:
 	./vendor/bin/sail exec laravel bash -c "./vendor/bin/openapi app -o resources/swagger/v${APP_API_VERSION}/openapi.json --format json"
+
+# Clear the index
+search-index-clear:
+	./vendor/bin/sail artisan scout:flush "App\Models\Article"
+
+# Re-populate the index
+search-index-import:
+	./vendor/bin/sail artisan scout:import "App\Models\Article"

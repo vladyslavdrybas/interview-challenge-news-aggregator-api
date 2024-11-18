@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\NewsAuthorController;
 use App\Http\Controllers\Api\NewsCategoryController;
 use App\Http\Controllers\Api\NewsSourceController;
+use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\UserFeedController;
 use App\Http\Controllers\Api\UserPreferenceController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,7 @@ Route::prefix('/v'. config('app.api.version'))
 Route::prefix('/v'. config('app.api.version') . '/articles')
     ->middleware(['auth:sanctum'])
     ->group(function () {
+        Route::get('/search', SearchController::class)->name('api.articles.search');
         Route::get('/', [ArticleController::class, 'index'])->name('api.articles');
         Route::get('/{id}', [ArticleController::class, 'show'])->name('api.articles.show');
     });
