@@ -11,6 +11,7 @@ use App\Models\Article;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Meilisearch\Endpoints\Indexes;
+use OpenApi\Attributes as OA;
 use function config;
 use function implode;
 use function min;
@@ -18,6 +19,41 @@ use function response;
 
 class SearchController extends Controller
 {
+    #[OA\Get(
+        path: '/articles/search',
+        summary: 'Search articles with pagination and optional filters.',
+        security: [
+            ['bearerHttpAuthentication' => new OA\SecurityScheme(ref: '#/components/securitySchemes/bearerHttpAuthentication')],
+        ],
+        tags: ['Articles'],
+        parameters: [
+            new OA\Parameter(ref: '#/components/parameters/page'),
+            new OA\Parameter(ref: '#/components/parameters/per_page'),
+            new OA\Parameter(ref: '#/components/parameters/sources[]'),
+            new OA\Parameter(ref: '#/components/parameters/keywords[]'),
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Successfully retrieved articles.',
+                content: new OA\MediaType(
+                    mediaType: 'application/json',
+                    schema: new OA\Schema(
+                        properties: [
+                            new OA\Property(property: 'type', type: 'string', example: 'list'),
+                            new OA\Property(property: 'pagination', ref: '#/components/schemas/PaginationInfo'),
+                            new OA\Property(property: 'data', type: 'array', items: new OA\Items(ref: '#/components/schemas/ArticleResource')),
+                        ],
+                        type: 'object'
+                    )
+                )
+            ),
+            new OA\Response(ref: '#/components/responses/400', response: 400),
+            new OA\Response(ref: '#/components/responses/401', response: 401),
+            new OA\Response(ref: '#/components/responses/422', response: 422),
+            new OA\Response(ref: '#/components/responses/404', response: 404),
+        ]
+    )]
     public function __invoke(ArticleListRequest $request): JsonResponse
     {
         $validated = $request->validated();
@@ -56,7 +92,6 @@ class SearchController extends Controller
                 'current_page' => $data->currentPage(),
                 'total_pages' => $data->lastPage(),
                 'total_items' => $data->total(),
-                'per_page' => $data->perPage(),
             ],
             'data' => ArticleResource::collection($data),
         ]);

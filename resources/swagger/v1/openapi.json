@@ -577,6 +577,144 @@
                 ]
             }
         },
+        "/articles/search": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Search articles with pagination and optional filters.",
+                "operationId": "d317586e85ad5412c9a72f94018b36db",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/sources[]"
+                    },
+                    {
+                        "$ref": "#/components/parameters/keywords[]"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved articles.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "example": "list"
+                                        },
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/PaginationInfo"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ArticleResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            }
+        },
+        "/user/feed": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Retrieve articles with pagination and user preferences.",
+                "operationId": "6fa1ee8ffd0ac5fc7fa4488c535f90d7",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/user_preferences[]"
+                    },
+                    {
+                        "$ref": "#/components/parameters/sort"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved articles.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "example": "list"
+                                        },
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/PaginationInfo"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ArticleResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerHttpAuthentication": {
+                            "$ref": "#/components/securitySchemes/bearerHttpAuthentication"
+                        }
+                    }
+                ]
+            }
+        },
         "/user/preferences": {
             "get": {
                 "tags": [
@@ -1252,6 +1390,15 @@
                 "name": "authors[]",
                 "in": "query",
                 "description": "Filter articles by authors (array of author IDs)",
+                "required": false,
+                "schema": {
+                    "$ref": "#/components/schemas/IntegerArray"
+                }
+            },
+            "user_preferences[]": {
+                "name": "user_preferences[]",
+                "in": "query",
+                "description": "Apply user_preferences to filter articles",
                 "required": false,
                 "schema": {
                     "$ref": "#/components/schemas/IntegerArray"
