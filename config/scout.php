@@ -140,10 +140,15 @@ return [
         'key' => env('MEILISEARCH_KEY'),
         'index-settings' => [
             Article::class => [
-                'filterableAttributes' => ['title', 'content', 'source', 'authors', 'categories', 'published_at', 'news_source_id'],
-                'sortableAttributes' => ['published_at', 'created_at']
+                'filterableAttributes' => ['source', 'authors', 'categories', 'published_at'],
+                'sortableAttributes' => ['published_at', 'created_at'],
+                'pagination' => [
+                    'maxTotalHits' => 5000
+                ],
             ],
         ],
+
+        'maxTotalHits' => 5000,
     ],
 
     /*

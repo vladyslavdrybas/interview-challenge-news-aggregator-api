@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Scout\Searchable;
 
 // TODO add link to origin
@@ -16,8 +17,9 @@ class Article extends Model
 
     // Specify the fillable attributes
     protected $fillable = ['title', 'content', 'published_at'];
+    protected $searchableAttributes = ['title', 'content'];
 
-    public function source()
+    public function source(): BelongsTo
     {
         return $this->belongsTo(NewsSource::class, 'news_source_id', 'id');
     }
@@ -32,25 +34,23 @@ class Article extends Model
         return $this->belongsToMany(NewsCategory::class);
     }
 
+    public function shouldBeSearchable(): bool
+    {
+        return null !== $this->news_source_id && $this->is_hidden === 0;
+    }
+
     public function toSearchableArray(): array
     {
-        // All model attributes are made searchable
-        $array = $this
-            ->with(['categories', 'authors', 'source'])
-            ->where('id', '=', $this->id)
-            ->where('is_hidden', '=', 0)
-            ->whereNotNull('news_source_id')
-            ->first()
-            ->toArray();
-
         $searchable = [
-            'title' => $array['title'],
-            'content' => $array['content'],
-            'published_at' => $array['published_at'],
-            'created_at' => $array['created_at'],
-            'categories' => $array['categories'],
-            'authors' => $array['authors'],
-            'source' => $array['source'],
+            'id' => (int) $this->id,
+            'title' => $this->title,
+            'content' => $this->content,
+            'published_at' => $this->published_at,
+            'created_at' => $this->created_at,
+
+            'categories' => $this->categories->map(fn($entity) => $entity->toSearchableArray())->toArray(),
+            'authors' => $this->authors->map(fn($entity) => $entity->toSearchableArray())->toArray(),
+            'source' => $this->source->toSearchableArray(),
         ];
 
         return $searchable;

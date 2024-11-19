@@ -43,4 +43,12 @@ class NewsAuthor extends Model
     {
         return $this->belongsToMany(UserPreference::class, 'user_preference_news_author');
     }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'id' => (int) $this->id,
+            'full_name' => $this->full_name,
+        ];
+    }
 }

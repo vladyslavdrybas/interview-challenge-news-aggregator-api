@@ -43,4 +43,12 @@ class NewsCategory extends Model
     {
         return $this->belongsToMany(UserPreference::class, 'user_preference_news_category');
     }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'id' => (int) $this->id,
+            'title' => $this->title,
+        ];
+    }
 }

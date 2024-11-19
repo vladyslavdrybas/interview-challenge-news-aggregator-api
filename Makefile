@@ -60,4 +60,5 @@ search-index-clear:
 
 # Re-populate the index
 search-index-import:
+	./vendor/bin/sail artisan scout:sync-index-settings
 	./vendor/bin/sail artisan scout:import "App\Models\Article"
